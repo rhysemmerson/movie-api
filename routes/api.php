@@ -18,19 +18,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /* /movies */
-Route::middleware('api')->get('/movies', 'MoviesController@moviesList');
-Route::middleware('api')->get('movies/{id}', 'ApiController@moviesRead');
-Route::middleware('api')->put('movies/{id}', 'ApiController@moviesUpdate');
-Route::middleware('api')->post('movies', 'ApiController@moviesCreate');
-Route::middleware('api')->put('movies/thumbnail/{id}', 'ApiController@moviesUploadThumbnail');
+Route::middleware('api')->get('movies', 'MoviesController@list');
+Route::middleware('api')->get('movies/{id}', 'MoviesController@read');
+Route::middleware('api')->put('movies/{id}', 'MoviesController@update');
+Route::middleware('api')->post('movies', 'MoviesController@create');
+Route::middleware('api')->post('movies/thumbnail/{id}', 'MoviesController@thumbnail');
+
+Route::middleware('api')->post('movies/{id}/cast', 'MoviesController@castAdd');
+Route::middleware('api')->delete('movies/{id}/cast/{actorId}', 'MoviesController@castRemove');
 
 /* actors */
-Route::get('actors/{id}', 'ApiController@actorsRead');
-Route::put('actors/{id}', 'ApiController@actorsUpdate');
-Route::post('actors', 'ApiController@actorsCreate');
-Route::put('actors/thumbnail/{id}', 'ApiController@actorsUploadThumbnail');
+Route::middleware('api')->get('actors', 'ActorsController@list');
+Route::middleware('api')->get('actors/{id}', 'ActorsController@read');
+Route::middleware('api')->put('actors/{id}', 'ActorsController@update');
+Route::middleware('api')->post('actors', 'ActorsController@create');
+Route::middleware('api')->post('actors/thumbnail/{id}', 'ActorsController@thumbnail');
 
 /* genres */
-Route::get('genres/{id}', 'ApiController@genresRead');
-Route::put('genres/{id}', 'ApiController@genresUpdate');
-Route::post('genres', 'ApiController@genresCreate');
+Route::middleware('api')->get('genres', 'GenresController@list');
+Route::middleware('api')->get('genres/{id}', 'GenresController@read');
+Route::middleware('api')->put('genres/{id}', 'GenresController@update');
+Route::middleware('api')->post('genres', 'GenresController@create');
+Route::middleware('api')->delete('genres/{id}', 'GenresController@remove');
