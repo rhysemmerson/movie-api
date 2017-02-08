@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Actor extends Model
 {
     
-    public $fillable = [
+    protected $fillable = [
         'name', 
         'bio',
         'birth_date',
-        'age',
         'thumbnail_uri'
     ];
 
-    public function movies() {
-        return $this->belongsToMany('App\Movie')->withPivot('role');
+    public function roles() {
+        return $this->hasMany('App\CastMember');
     }
+
 }

@@ -24,13 +24,13 @@ class CreateMoviesTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('genre_id')->unsigned();
+            $table->integer('genre_id')->unsigned()->nullable();
             $table->foreign('genre_id')->references('id')->on('genres');
 
             $table->string('name');
-            $table->string('rating');
+            $table->string('rating')->nullable();
             $table->text('description');
-            $table->string('thumbnail_uri');
+            $table->string('thumbnail_uri')->nullable();
         });
 
         Schema::create('actors', function (Blueprint $table) {
@@ -39,12 +39,13 @@ class CreateMoviesTable extends Migration
 
             $table->string('name');
             $table->date('birth_date');
-            $table->integer('age');
-            $table->text('bio');
-            $table->string('thumbnail_uri');
+            $table->text('bio')->nullable();
+            $table->string('thumbnail_uri')->nullable();
         });
 
-        Schema::create('actor_movie', function (Blueprint $table) {
+        Schema::create('cast_members', function (Blueprint $table) {
+            $table->timestamps();
+
             $table->integer('actor_id')->unsigned();
             $table->integer('movie_id')->unsigned();
 
@@ -52,8 +53,6 @@ class CreateMoviesTable extends Migration
             $table->foreign('movie_id')->references('id')->on('movies');
 
             $table->string('role');
-
-            $table->timestamps();
         });
     }
 
@@ -64,9 +63,11 @@ class CreateMoviesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actor_movie');
-        Schema::dropIfExists('actors');
+        
+        Schema::dropIfExists('cast_members');
         Schema::dropIfExists('movies');
+        Schema::dropIfExists('actors');
         Schema::dropIfExists('genres');
+        
     }
 }
