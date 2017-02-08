@@ -101,6 +101,9 @@ class MoviesController extends Controller {
         return $this->movieResult($movie);
     }
 
+    /**
+     * Links an actor to a movie or updates their role
+     */
     public function castAdd(Request $request, $id) {
         $this->validate($request, [
             'cast'              => 'required|array',
@@ -135,6 +138,11 @@ class MoviesController extends Controller {
             ->header('Content-Type', 'text/plain');
     }
 
+    /**
+     * Upload and link an image to the movie.
+     *
+     * Images are stored with the public storage engine.
+     */
     public function thumbnail(Request $request, $id) {
         $this->validate($request, [
             'thumbnail' => 'required|image'

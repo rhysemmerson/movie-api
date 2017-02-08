@@ -28,7 +28,7 @@ class GenresController extends Controller
 
         $result = new Item($genre, new GenreTransformer);
 
-        $fractal->parseIncludes('movies');
+        $fractal->parseIncludes('movies,actors');
 
         return response($fractal->createData($result)->toJson(), 200)
                   ->header('Content-Type', 'application/json');
