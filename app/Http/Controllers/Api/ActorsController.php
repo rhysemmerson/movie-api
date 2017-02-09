@@ -32,7 +32,7 @@ class ActorsController extends Controller {
      * GET: actors
      */
     public function list(Request $request) {
-        $actors = Actors::all();
+        $actors = Actor::all();
 
         $fractal = new Manager;
         $result = new Collection($actors, new ActorTransformer);

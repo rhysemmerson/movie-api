@@ -53,7 +53,8 @@ class DatabaseSeeder extends Seeder
                 $movie = App\Movie::create([
                     'name' => $_movie->title,
                     'description' => $_movie->description,
-                    'rating' => rand(30, 100) / 10
+                    'rating' => rand(30, 100) / 10,
+                    'thumbnail_uri' => $_movie->image
                 ]);
 
                 /* associate genre */

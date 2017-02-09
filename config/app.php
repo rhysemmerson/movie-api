@@ -163,6 +163,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        /* for CORS headers */
+        Barryvdh\Cors\ServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
